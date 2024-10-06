@@ -8,6 +8,7 @@ import { useAuthStore } from "@state/authStore"
 import { tokenStorage } from "@state/storage"
 import { resetAndNavigate } from "@utils/NavigationUtils"
 import { jwtDecode } from "jwt-decode"
+import { refetchUser, refresh_tokens } from "@service/authService"
 
 GeoLocation.setRNConfiguration({
   skipPermissionRequests: false,
@@ -49,6 +50,12 @@ const SplashScreen: FC = () => {
 
           return false
         }
+      }
+
+      if (user?.role === "Customer") {
+        resetAndNavigate("ProductDashboard")
+      } else {
+        resetAndNavigate("DeliveryDashboard")
       }
 
       return true
