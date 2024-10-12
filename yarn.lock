@@ -2084,6 +2084,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@r0b0t3d/react-native-collapsible@npm:^1.4.3":
+  version: 1.4.3
+  resolution: "@r0b0t3d/react-native-collapsible@npm:1.4.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: ">=3.0.0"
+  checksum: 10/2ddc2f8323b7fbde17a1951913c48f5a89793663267897c0d27bbd30908f1b220d2eab1a6e995ccb6fc9b85e67a0f9887b1b8ee272dd617c79b66081c9804f7f
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:14.0.0":
   version: 14.0.0
   resolution: "@react-native-community/cli-clean@npm:14.0.0"
@@ -3715,6 +3727,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
     "@homielab/react-native-auto-scroll": "npm:^0.0.10"
+    "@r0b0t3d/react-native-collapsible": "npm:^1.4.3"
     "@react-native-community/geolocation": "npm:^3.3.0"
     "@react-native/babel-preset": "npm:0.75.2"
     "@react-native/eslint-config": "npm:0.75.2"
@@ -3742,6 +3755,7 @@ __metadata:
     react-native-pager-view: "npm:^6.4.0"
     react-native-reanimated: "npm:^3.15.0"
     react-native-responsive-fontsize: "npm:^0.5.1"
+    react-native-rolling-bar: "npm:^1.0.0"
     react-native-safe-area-context: "npm:^4.10.9"
     react-native-screens: "npm:^3.34.0"
     react-native-svg: "npm:^15.6.0"
@@ -8647,6 +8661,16 @@ __metadata:
   peerDependencies:
     react-native: ">=0.42.0"
   checksum: 10/c8cb2b7c3da9292023d473b5c2efe4d9a2c898130ec0c64f4065ff96dbc45a27ffb4f1504cab0a1413174e26dfd9916ebd72cc403b5aa0b32b03c135a51e1c45
+  languageName: node
+  linkType: hard
+
+"react-native-rolling-bar@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-native-rolling-bar@npm:1.0.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/ec6d3f96ae33d667268c85a487ae06eef43453970924c3623914e2fabe96711531c508ec3cfa7c6089f4069a55b1c2a12955e8795f14af68461d3e147f2a1dd0
   languageName: node
   linkType: hard
 
