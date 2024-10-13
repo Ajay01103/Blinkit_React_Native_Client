@@ -1,19 +1,34 @@
-import { View, Text, TextStyle, StyleSheet } from "react-native"
-import React from "react"
+import React, { memo } from "react"
+import { Text, TextStyle, StyleSheet, LayoutChangeEvent } from "react-native"
 import { Colors, Fonts } from "@utils/Constants"
 import { RFValue } from "react-native-responsive-fontsize"
 
+type TextVariant = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8" | "h9" | "body"
+
 interface Props {
-  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8" | "h9" | "body"
+  variant?: TextVariant
   fontFamily?: Fonts
   fontSize?: number
   style?: TextStyle | TextStyle[]
   children?: React.ReactNode
   numberOfLines?: number
-  onLayout?: (event: object) => void
+  onLayout?: (event: LayoutChangeEvent) => void
 }
 
-const CustomText: React.FC<Props> = ({
+const variantSizes: Record<TextVariant, number> = {
+  h1: 22,
+  h2: 20,
+  h3: 18,
+  h4: 16,
+  h5: 14,
+  h6: 12,
+  h7: 12,
+  h8: 10,
+  h9: 9,
+  body: 12,
+}
+
+const CustomTextComponent: React.FC<Props> = ({
   variant = "body",
   fontFamily = Fonts.Regular,
   fontSize,
@@ -23,45 +38,13 @@ const CustomText: React.FC<Props> = ({
   onLayout,
   ...props
 }) => {
-  let computedFontSize: number
+  const computedFontSize = RFValue(fontSize || variantSizes[variant])
 
-  switch (variant) {
-    case "h1":
-      computedFontSize = RFValue(fontSize || 22)
-    case "h2":
-      computedFontSize = RFValue(fontSize || 20)
-    case "h3":
-      computedFontSize = RFValue(fontSize || 18)
-    case "h4":
-      computedFontSize = RFValue(fontSize || 16)
-    case "h5":
-      computedFontSize = RFValue(fontSize || 14)
-    case "h6":
-      computedFontSize = RFValue(fontSize || 12)
-    case "h7":
-      computedFontSize = RFValue(fontSize || 12)
-    case "h8":
-      computedFontSize = RFValue(fontSize || 10)
-    case "h9":
-      computedFontSize = RFValue(fontSize || 9)
-    case "body":
-      computedFontSize = RFValue(fontSize || 12)
-      break
-  }
-
-  const fontFamilyStyle = {
-    fontFamily,
-  }
   return (
     <Text
       onLayout={onLayout}
-      style={[
-        styles.text,
-        { color: Colors.text, fontSize: computedFontSize },
-        fontFamilyStyle,
-        style,
-      ]}
-      numberOfLines={numberOfLines !== undefined ? numberOfLines : undefined}
+      style={[styles.text, { fontFamily, fontSize: computedFontSize }, style]}
+      numberOfLines={numberOfLines}
       {...props}
     >
       {children}
@@ -72,7 +55,14 @@ const CustomText: React.FC<Props> = ({
 const styles = StyleSheet.create({
   text: {
     textAlign: "left",
+    color: Colors.text,
   },
 })
 
-export default CustomText
+const MemoizedCustomText = memo(CustomTextComponent)
+
+// This is the default export, which allows existing imports to work without changes
+export default MemoizedCustomText
+
+// We also provide a named export for those who prefer it
+export { MemoizedCustomText as CustomText }

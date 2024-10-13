@@ -1,4 +1,4 @@
-import { Animated as RNAnimated, SafeAreaView, StyleSheet } from "react-native"
+import { Animated as RNAnimated, SafeAreaView, StyleSheet, View } from "react-native"
 import React, { useEffect, useRef } from "react"
 import NoticeAnimation from "./NoticeAnimation"
 import { NoticeHeight } from "@utils/Scaling"
@@ -6,10 +6,15 @@ import Visuals from "./Visuals"
 import {
   CollapsibleContainer,
   CollapsibleHeaderContainer,
+  CollapsibleScrollView,
   withCollapsibleContext,
 } from "@r0b0t3d/react-native-collapsible"
 import AnimatedHeader from "./AnimatedHeader"
 import StickySearchBar from "./StickySearchBar"
+import Content from "@components/dashboard/Content"
+import CustomText from "@components/ui/CustomText"
+import { RFValue } from "react-native-responsive-fontsize"
+import { Fonts } from "@utils/Constants"
 
 const NOTICE_HEIGHT = -(NoticeHeight + 18)
 
@@ -59,6 +64,30 @@ const ProductDashboard = () => {
 
             <StickySearchBar />
           </CollapsibleHeaderContainer>
+
+          <CollapsibleScrollView
+            nestedScrollEnabled
+            style={styles.pannelContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            <Content />
+
+            <View style={{ backgroundColor: "#F8F8F8", padding: 20 }}>
+              <CustomText
+                fontSize={RFValue(32)}
+                fontFamily={Fonts.Bold}
+                style={{ opacity: 0.2 }}
+              >
+                India's last Minute App 🥭
+              </CustomText>
+              <CustomText
+                fontFamily={Fonts.Bold}
+                style={{ opacity: 0.2, marginTop: 10, paddingBottom: 100 }}
+              >
+                Developed by ✨ Ajay Singh
+              </CustomText>
+            </View>
+          </CollapsibleScrollView>
         </CollapsibleContainer>
       </>
     </NoticeAnimation>

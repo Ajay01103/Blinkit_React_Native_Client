@@ -22,7 +22,7 @@ const NoticeAnimation: FC<{ noticePosition: any; children: React.ReactElement }>
           {
             paddingTop: noticePosition.interpolate({
               inputRange: [NOTICE_HEIGHT, 0],
-              outputRange: [0, NOTICE_HEIGHT + 20],
+              outputRange: [0, NoticeHeight + 20],
             }),
           },
         ]}
