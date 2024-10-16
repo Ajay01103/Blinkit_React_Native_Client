@@ -19,14 +19,14 @@ interface Props {
 const Sidebar: FC<Props> = ({ categories, onCategoryPress, selectedCategory }) => {
   const scrollViewRef = useRef<ScrollView>(null)
   const indicatorPosition = useSharedValue(0)
-  const animatedValue = categories?.map(() => useSharedValue(0))
+  const animatedValues = categories?.map(() => useSharedValue(0))
 
   useEffect(() => {
     let targetIndex = -1
 
     categories?.forEach((category: any, i: number) => {
       const isSelected = selectedCategory?._id === category?._id
-      animatedValue[i].value = withTiming(isSelected ? 2 : -15, { duration: 500 })
+      animatedValues[i].value = withTiming(isSelected ? 2 : -15, { duration: 500 })
       if (isSelected) targetIndex = i
     })
 
@@ -44,6 +44,7 @@ const Sidebar: FC<Props> = ({ categories, onCategoryPress, selectedCategory }) =
   const indicatorStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: indicatorPosition.value }],
   }))
+
   return (
     <View style={styles.sidebar}>
       <ScrollView
@@ -56,16 +57,13 @@ const Sidebar: FC<Props> = ({ categories, onCategoryPress, selectedCategory }) =
         <Animated.View>
           {categories?.map((category: any, i: number) => {
             const animatedStyles = useAnimatedStyle(() => ({
-              bottom: animatedValue[i].value,
+              bottom: animatedValues[i].value,
             }))
             return (
               <TouchableOpacity
                 key={i}
                 activeOpacity={1}
-                style={[
-                  styles.categoryButton,
-                  selectedCategory?.id === category.id && styles.selectedCategoryButton,
-                ]}
+                style={[styles.categoryButton]}
                 onPress={() => onCategoryPress(category)}
               >
                 <View
@@ -97,7 +95,7 @@ const Sidebar: FC<Props> = ({ categories, onCategoryPress, selectedCategory }) =
 
 const styles = StyleSheet.create({
   sidebar: {
-    width: "20%",
+    width: "24%",
     backgroundColor: "#fff",
     borderRightWidth: 0.8,
     borderRightColor: "#eee",
@@ -105,6 +103,7 @@ const styles = StyleSheet.create({
   },
   categoryButton: {
     padding: 10,
+    height: 100,
     paddingVertical: 0,
     justifyContent: "center",
     alignItems: "center",
@@ -120,9 +119,9 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     borderRadius: 100,
-    height: 80,
+    height: "50%",
     marginBottom: 10,
-    width: 80,
+    width: "75%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F3F4F7",
