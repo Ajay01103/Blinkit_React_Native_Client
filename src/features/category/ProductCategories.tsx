@@ -5,6 +5,7 @@ import { Colors } from "@utils/Constants"
 import Sidebar from "./Sidebar"
 import { getAllCategories, getProductsByCategoryId } from "@service/productService"
 import ProductList from "./ProductList"
+import WithCart from "@features/cart/Withcart"
 
 const ProductCategories: FC = () => {
   const [categories, setCategories] = useState<any[]>([])
@@ -103,4 +104,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ProductCategories
+export default WithCart(ProductCategories)

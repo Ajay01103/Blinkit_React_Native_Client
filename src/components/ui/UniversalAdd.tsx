@@ -43,7 +43,7 @@ const UniversalAdd: FC<{ item: any }> = ({ item }) => {
             {count}
           </CustomText>
 
-          <Pressable onPress={() => addItem(item._id)}>
+          <Pressable onPress={() => addItem(item)}>
             <Icon
               name="plus"
               color="#fff"
