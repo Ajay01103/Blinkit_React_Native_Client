@@ -38,7 +38,7 @@ const ProductOrder: FC = () => {
 
     const formatedData = cart.map((item) => ({
       id: item._id,
-      item: item._id,
+      items: item.item,
       count: item.count,
     }))
 
@@ -48,13 +48,22 @@ const ProductOrder: FC = () => {
     }
 
     setLoading(true)
-    const data = await createOrder(formatedData, totalItemPrice)
+    console.log("Formatted Data:", formatedData)
+    console.log("Total Item Price:", totalItemPrice)
 
-    if (data != null) {
-      setCurrentOrder(data)
-      clearCart()
-      navigate("OrderSuccess", { ...data })
-    } else {
+    try {
+      const data = await createOrder(formatedData, totalItemPrice)
+      console.log("Order Creation Response:", data)
+
+      if (data !== null) {
+        setCurrentOrder(data)
+        navigate("OrderSuccess", { ...data })
+        clearCart()
+      } else {
+        Alert.alert("There was an error")
+      }
+    } catch (error) {
+      console.error("Error creating order:", error)
       Alert.alert("There was an error")
     }
 
@@ -173,9 +182,7 @@ const ProductOrder: FC = () => {
                 loading={loading}
                 price={totalItemPrice}
                 title="Place Order"
-                onPress={async () => {
-                  await handlePlaceOrder()
-                }}
+                onPress={handlePlaceOrder}
               />
             </View>
           </View>
